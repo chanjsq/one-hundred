@@ -116,15 +116,6 @@ export default {
   animation: breathe 1s linear infinite alternate both;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
 @keyframes breathe {
   from {
     width: 24px;

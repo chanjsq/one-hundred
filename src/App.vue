@@ -41,4 +41,13 @@ body {
     background-position-y: -1352px;
   }
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
 </style>
