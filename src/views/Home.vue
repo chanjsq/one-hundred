@@ -1,5 +1,5 @@
 <template>
-  <div class="home scrolling-side" @click="onPlay">
+  <div class="home scrolling-side">
     <div class="music-btn"></div>
     <img class="title" src="@/assets/img/title.png">
     <img class="eye" src="@/assets/img/eye.png">
@@ -19,9 +19,6 @@
 <script>
 export default {
   methods: {
-    onPlay() {
-      this.$emit('play');
-    },
     toLogin() {
       this.$router.push('/login');
     },

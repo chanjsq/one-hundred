@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <router-view @play="playMusic" />
+  <div @click="playMusic">
+    <router-view />
     <audio ref="bgMusic" src="@/assets/audio/bg.mp3"></audio>
   </div>
 </template>
