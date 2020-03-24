@@ -1,7 +1,6 @@
 <template>
-  <div class="home" @click="playMusic">
+  <div class="home scrolling-side" @click="onPlay">
     <div class="music-btn"></div>
-    <audio ref="bgMusic" src="@/assets/audio/bg.mp3"></audio>
     <img class="title" src="@/assets/img/title.png">
     <img class="eye" src="@/assets/img/eye.png">
     <img class="eye-outline" src="@/assets/img/eye-outline.png">
@@ -9,7 +8,7 @@
     <div class="slide">
       <img class="slide-line" src="@/assets/img/slide-line.png">
       <img class="slide-text" src="@/assets/img/slide-text.png">
-      <div class="slide-btn">
+      <div class="slide-btn" @click="toLogin">
         <img class="slide-btn-inner" src="@/assets/img/slide-btn-inner.png">
         <img class="slide-btn-outer" src="@/assets/img/slide-btn-outer.png">
       </div>
@@ -20,11 +19,11 @@
 <script>
 export default {
   methods: {
-    playMusic() {
-      const { bgMusic } = this.$refs;
-      if (bgMusic.paused) {
-        bgMusic.play();
-      }
+    onPlay() {
+      this.$emit('play');
+    },
+    toLogin() {
+      this.$router.push('/login');
     },
   },
 };
@@ -35,8 +34,7 @@ export default {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background: #fbec71 url(~@/assets/img/side.jpg) repeat-y 0 0 / 40px;
-  animation: side-scroll 25s linear infinite both;
+  background-color: #fbec71;
 }
 
 .music-btn {
@@ -116,15 +114,6 @@ export default {
 
 .slide-btn-outer {
   animation: breathe 1s linear infinite alternate both;
-}
-
-@keyframes side-scroll {
-  from {
-    background-position-y: 0;
-  }
-  to {
-    background-position-y: -1352px;
-  }
 }
 
 @keyframes spin {
