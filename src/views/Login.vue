@@ -13,7 +13,6 @@
 export default {
   methods: {
     onSubmit() {
-
     },
   },
 };
@@ -80,5 +79,10 @@ export default {
   width: 128px;
   height: 33px;
   transition: all .15s linear;
+}
+
+.confirm-top:active {
+  top: 466px;
+  left: 102px;
 }
 </style>
