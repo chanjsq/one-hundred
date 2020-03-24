@@ -13,6 +13,7 @@
 export default {
   methods: {
     onSubmit() {
+      this.$router.push('/list');
     },
   },
 };
