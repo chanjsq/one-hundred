@@ -9,7 +9,7 @@
 export default {
   methods: {
     playMusic() {
-      this.$refs.bgMusic.play().catch(() => console.log('click to play music'));
+      this.$refs.bgMusic.play();
     },
   },
 };
