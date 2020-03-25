@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div ref="text">{{ text }}</div>
+    <div class="text" ref="text">{{ text }}</div>
   </div>
 </template>
 
@@ -13,9 +13,13 @@ export default {
       type: String,
       required: true,
     },
+    radius: {
+      type: Number,
+      required: true,
+    },
   },
   mounted() {
-    new CircleType(this.$refs.text).radius(1000);
+    new CircleType(this.$refs.text).radius(this.radius);
   },
 };
 </script>
