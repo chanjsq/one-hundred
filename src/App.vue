@@ -21,6 +21,7 @@ export default {
 <style>
 body {
   margin: 0;
+  font-family: 'Heiti SC', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 .scrolling-side,

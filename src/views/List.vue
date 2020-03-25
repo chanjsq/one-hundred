@@ -1,6 +1,11 @@
 <template>
   <div class="list">
-    <div class="top"></div>
+    <div class="top">
+      <div class="num-box">
+        <div class="select-num">0</div>
+        <div class="select-state">已完成</div>
+      </div>
+    </div>
     <div class="list-bd">
       <list-item
         class="list-item"
@@ -11,6 +16,7 @@
         :radius="item.radius"
       />
     </div>
+    <img class="confirm-text" src="@/assets/img/confirm-text.png">
   </div>
 </template>
 
@@ -31,7 +37,7 @@ export default {
     randomItems() {
       return _.shuffle(this.items).map((item, index) => {
         const i = index + 1;
-        const y = _.random(0, 520, false);
+        const y = _.random(0, 350, false);
         const r = _.random(0, 360, false);
         const a = 1000 - y;
         return {
@@ -59,8 +65,33 @@ export default {
 }
 
 .top {
+  position: relative;
   height: 42px;
   background: url(~@/assets/img/select-top.png) no-repeat 0 0 / cover;
+  box-shadow: 0 1px rgba(0, 0, 0, .3);
+}
+
+.num-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 47px;
+  height: 100%;
+  background: #f5e000;
+  text-align: center;
+  line-height: 1;
+}
+
+.select-num {
+  font-weight: 700;
+  font-style: italic;
+  font-size: 23px;
+  color: #000;
+  margin-top: 4px;
+}
+
+.select-state {
+  font-size: 12px;
 }
 
 .list-bd {
@@ -77,5 +108,13 @@ export default {
   position: absolute;
   top: 0;
   left: 50%;
+}
+
+.confirm-text {
+  position: absolute;
+  top: 600px;
+  left: calc(50% - 130px / 2);
+  width: 130px;
+  height: 12px;
 }
 </style>
