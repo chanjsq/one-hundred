@@ -18,7 +18,15 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@function px2vw($px) {
+  @return (100vw * $px) / 375px;
+}
+
+.box {
+  width: px2vw(100px);
+}
+
 body {
   margin: 0;
   font-family: 'Heiti SC', 'Helvetica Neue', Helvetica, sans-serif;
