@@ -1,12 +1,17 @@
 <template>
-  <div class="list">
+  <div
+    class="list"
+    @touchstart="onTouchStart"
+    @touchmove="onTouchMove"
+    @touchend="onTouchEnd"
+  >
     <div class="top">
       <div class="num-box">
         <div class="select-num">0</div>
         <div class="select-state">已完成</div>
       </div>
     </div>
-    <div class="list-bd">
+    <div ref="wheel" class="list-bd" :style="{ animationPlayState }">
       <list-item
         class="list-item"
         v-for="item in randomItems"
@@ -32,6 +37,8 @@ export default {
   data() {
     return {
       items,
+      animationPlayState: 'running',
+      startX: null,
     };
   },
   computed: {
@@ -51,6 +58,17 @@ export default {
           radius: a,
         };
       });
+    },
+  },
+  methods: {
+    onTouchStart(event) {
+      this.startX = event.touches[0].clientX;
+      this.animationPlayState = 'paused';
+    },
+    onTouchMove() {
+    },
+    onTouchEnd() {
+      this.animationPlayState = 'running';
     },
   },
 };
