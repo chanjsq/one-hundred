@@ -6,6 +6,7 @@
     <input class="input" v-focus>
     <img class="confirm-bg" src="@/assets/img/confirm-bg.png">
     <img class="confirm-top" src="@/assets/img/confirm-top.png" @click="onSubmit">
+    <audio ref="clickMusic" src="@/assets/audio/click.mp3"></audio>
   </div>
 </template>
 
@@ -13,7 +14,9 @@
 export default {
   methods: {
     onSubmit() {
-      this.$router.replace('/list');
+      this.$refs.clickMusic.play().then(() => {
+        this.$router.replace('/list');
+      });
     },
   },
 };
