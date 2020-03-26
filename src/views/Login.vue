@@ -13,7 +13,7 @@
 export default {
   methods: {
     onSubmit() {
-      this.$router.push('/list');
+      this.$router.replace('/list');
     },
   },
 };
@@ -21,6 +21,7 @@ export default {
 
 <style scoped>
 .login {
+  width: 100vw;
   height: 100vh;
 }
 

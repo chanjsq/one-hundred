@@ -1,6 +1,8 @@
 <template>
   <div @click="playMusic">
-    <router-view />
+    <transition name="slide-left">
+      <router-view />
+    </transition>
     <audio ref="bgMusic" src="@/assets/audio/bg.mp3"></audio>
   </div>
 </template>
@@ -19,27 +21,53 @@ export default {
 </script>
 
 <style lang="scss">
-@function px2vw($px) {
-  @return (100vw * $px) / 375px;
-}
-
-.box {
-  width: px2vw(100px);
-}
-
 body {
   margin: 0;
   font-family: 'Heiti SC', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
-.scrolling-side,
-.scrolling-side-right {
-  background: url(~@/assets/img/side.jpg) repeat-y 0 0 / 40px;
+// 页面切换过渡
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 1s;
+}
+
+.slide-left-enter-to,
+.slide-left-leave {
+  transform: translateX(0);
+}
+
+.slide-left-leave-to {
+  transform: translateX(-100vw);
+}
+
+.slide-left-enter {
+  transform: translateX(100vw);
+}
+
+// 滚动侧栏图片
+
+.scrolling-side::before,
+.scrolling-side-right::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 100vh;
+  background: url(~@/assets/img/side.jpg) repeat-y 0 0 / 100%;
   animation: side 25s linear infinite both;
 }
 
-.scrolling-side-right {
-  background-position-x: right;
+.scrolling-side::before {
+  left: 0;
+}
+
+.scrolling-side-right::after {
+  right: 0;
 }
 
 @keyframes side {
