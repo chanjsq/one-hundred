@@ -11,6 +11,7 @@
         class="list-item"
         v-for="item in randomItems"
         :key="item.id"
+        :id="item.id"
         :text="item.text"
         :style="item.style"
         :radius="item.radius"
