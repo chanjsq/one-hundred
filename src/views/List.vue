@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="list"
-    @touchstart="onTouchStart"
-    @touchmove="onTouchMove"
-    @touchend="onTouchEnd"
-  >
+  <div class="list">
     <div class="top">
       <div class="num-box">
         <div class="select-num">0</div>
@@ -43,32 +38,21 @@ export default {
   },
   computed: {
     randomItems() {
-      return _.shuffle(this.items).map((item, index) => {
-        const i = index + 1;
-        const y = _.random(0, 350, false);
-        const r = _.random(0, 360, false);
-        const a = 1000 - y;
+      return this.items.map((item, index) => {
+        const id = index + 1;
+        const top = _.random(0, 350, false);
+        const angle = _.random(0, 360, false);
+        const radius = 1000 - top;
         return {
-          id: i,
+          id,
           text: item,
           style: {
-            transform: `translateY(${y}px) rotate(${r}deg)`,
-            transformOrigin: `center ${a}px`,
+            transform: `translateY(${top}px) rotate(${angle}deg)`,
+            transformOrigin: `center ${radius}px`,
           },
-          radius: a,
+          radius,
         };
       });
-    },
-  },
-  methods: {
-    onTouchStart(event) {
-      this.startX = event.touches[0].clientX;
-      this.animationPlayState = 'paused';
-    },
-    onTouchMove() {
-    },
-    onTouchEnd() {
-      this.animationPlayState = 'running';
     },
   },
 };
