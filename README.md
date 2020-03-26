@@ -1,24 +1,3 @@
-# h5-todo
+# 人生必做的 100 件事
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+仿网易 H5 活动: https://wp.m.163.com/163/html/news/one_hundred_2/index.html
