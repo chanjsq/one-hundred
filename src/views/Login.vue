@@ -25,6 +25,7 @@ export default {
     onSubmit() {
       if (this.name) {
         this.$emit('login', this.name);
+        this.showError = false;
         this.$refs.clickMusic.play().then(() => {
           this.$router.replace('/list');
         });
