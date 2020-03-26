@@ -1,5 +1,5 @@
 <template>
-  <div @click="playMusic">
+  <div class="app" @click="playMusic">
     <transition name="slide-left">
       <router-view />
     </transition>
@@ -24,6 +24,12 @@ export default {
 body {
   margin: 0;
   font-family: 'Heiti SC', 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 // 页面切换过渡
