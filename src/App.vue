@@ -1,7 +1,7 @@
 <template>
   <div class="app" @click="playMusic">
     <transition name="slide-left">
-      <router-view />
+      <router-view @login="saveName" />
     </transition>
     <audio ref="bgMusic" src="@/assets/audio/bg.mp3"></audio>
   </div>
@@ -9,12 +9,20 @@
 
 <script>
 export default {
+  data() {
+    return {
+      name: '',
+    };
+  },
   methods: {
     playMusic() {
       const { bgMusic } = this.$refs;
       if (bgMusic.paused) {
         bgMusic.play();
       }
+    },
+    saveName(name) {
+      this.name = name;
     },
   },
 };

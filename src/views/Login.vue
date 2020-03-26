@@ -3,7 +3,10 @@
     <img class="title" src="@/assets/img/title-2.png">
     <img class="input-bg" src="@/assets/img/input-bg.png">
     <img class="input-circle" src="@/assets/img/input-circle.png">
-    <input class="input" v-focus>
+    <input class="input" v-model="name" v-focus>
+    <div class="error-tip" v-if="showError">
+      <img class="error-img" src="@/assets/img/error.png">请输入名字
+    </div>
     <img class="confirm-bg" src="@/assets/img/confirm-bg.png">
     <img class="confirm-top" src="@/assets/img/confirm-top.png" @click="onSubmit">
     <audio ref="clickMusic" src="@/assets/audio/click.mp3"></audio>
@@ -12,11 +15,22 @@
 
 <script>
 export default {
+  data() {
+    return {
+      name: '',
+      showError: false,
+    };
+  },
   methods: {
     onSubmit() {
-      this.$refs.clickMusic.play().then(() => {
-        this.$router.replace('/list');
-      });
+      if (this.name) {
+        this.$emit('login', this.name);
+        this.$refs.clickMusic.play().then(() => {
+          this.$router.replace('/list');
+        });
+      } else {
+        this.showError = true;
+      }
     },
   },
 };
@@ -69,6 +83,27 @@ export default {
   text-align: center;
 }
 
+.error-tip {
+  position: absolute;
+  top: 334px;
+  left: 0;
+  right: 50px;
+  text-align: center;
+  color: #eb5e54;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-img {
+  width: 12px;
+  height: 12px;
+  display: block;
+  margin-right: 3px;
+  animation: shine .5s linear infinite alternate both;
+}
+
 .confirm-bg {
   position: absolute;
   top: 466px;
@@ -89,5 +124,14 @@ export default {
 .confirm-top:active {
   top: 466px;
   left: 102px;
+}
+
+@keyframes shine {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>
