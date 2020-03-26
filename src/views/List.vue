@@ -105,6 +105,7 @@ export default {
   height: 2000px;
   border-radius: 50%;
   animation: spin 200s linear infinite;
+  color: #000;
 }
 
 .list-item {
