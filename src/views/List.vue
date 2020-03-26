@@ -39,10 +39,9 @@ export default {
   computed: {
     randomItems() {
       return this.items.map((item, index) => {
-        const id = index + 1;
-        const top = _.random(0, 350, false);
-        const angle = _.random(0, 360, false);
-        const radius = 1000 - top;
+        const {
+          id, top, angle, radius,
+        } = this.getConfigByIndex(index);
         return {
           id,
           text: item,
@@ -53,6 +52,23 @@ export default {
           radius,
         };
       });
+    },
+  },
+  methods: {
+    getConfigByIndex(index) {
+      const id = index + 1;
+      let top;
+      if (index % 10 < 5) {
+        top = 50 + (index % 5) * 80;
+      } else {
+        top = 50 + (index % 5) * 80 + 40;
+      }
+      top += _.random(-10, 10, false);
+      const angle = Math.floor(index / 5) * 18;
+      const radius = 2000 / 2 - top;
+      return {
+        id, top, angle, radius,
+      };
     },
   },
 };
@@ -99,12 +115,12 @@ export default {
 
 .list-bd {
   position: absolute;
-  top: 80px;
+  top: 97px;
   left: calc(50% - 2000px / 2);
   width: 2000px;
   height: 2000px;
   border-radius: 50%;
-  animation: spin 200s linear infinite;
+  animation: spin 140s linear infinite;
   color: #000;
 }
 
