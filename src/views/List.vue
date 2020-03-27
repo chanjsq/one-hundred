@@ -19,6 +19,10 @@
       />
     </div>
     <img class="confirm-text" src="@/assets/img/confirm-text.png">
+    <template v-if="selectedCount">
+      <img class="btn-bg" src="@/assets/img/confirm-bg.png">
+      <img class="btn-text" src="@/assets/img/confirm-btn.png">
+    </template>
   </div>
 </template>
 
@@ -149,5 +153,26 @@ export default {
   left: calc(50% - 130px / 2);
   width: 130px;
   height: 12px;
+}
+
+.btn-text {
+  position: absolute;
+  bottom: 13px;
+  left: calc(50% - 128px / 2);
+  width: 128px;
+  height: 33px;
+}
+
+.btn-text:active {
+  bottom: 11px;
+  left: calc(50% - 128px / 2 + 2px);
+}
+
+.btn-bg {
+  position: absolute;
+  bottom: 9px;
+  left: calc(50% - 130px / 2 + 3px);;
+  width: 130px;
+  height: 35px;
 }
 </style>
