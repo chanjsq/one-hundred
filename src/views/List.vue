@@ -2,7 +2,7 @@
   <div class="list">
     <div class="top">
       <div class="num-box">
-        <div class="select-num">0</div>
+        <div class="select-num">{{ selectedCount }}</div>
         <div class="select-state">已完成</div>
       </div>
     </div>
@@ -15,6 +15,7 @@
         :text="item.text"
         :style="item.style"
         :radius="item.radius"
+        @toggle="updateSelectedItems"
       />
     </div>
     <img class="confirm-text" src="@/assets/img/confirm-text.png">
@@ -33,6 +34,7 @@ export default {
   data() {
     return {
       items,
+      selectedItems: [],
       animationPlayState: 'running',
       startX: null,
     };
@@ -54,6 +56,9 @@ export default {
         };
       });
     },
+    selectedCount() {
+      return this.selectedItems.length;
+    },
   },
   methods: {
     getConfigByIndex(index) {
@@ -70,6 +75,13 @@ export default {
       return {
         id, top, angle, radius,
       };
+    },
+    updateSelectedItems(text) {
+      if (this.selectedItems.includes(text)) {
+        this.selectedItems = this.selectedItems.filter((item) => item !== text);
+      } else {
+        this.selectedItems.push(text);
+      }
     },
   },
 };

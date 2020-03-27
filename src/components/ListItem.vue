@@ -4,13 +4,13 @@
       v-show="selected"
       class="img"
       :style="{ backgroundImage: `url(/things/${id}.png)` }"
-      @click="selected = false"
+      @click="toggle"
     >
     </div>
     <div
       v-show="!selected"
       ref="text"
-      @click="selected = true"
+      @click="toggle"
     >
       {{ text }}
     </div>
@@ -39,6 +39,12 @@ export default {
     return {
       selected: false,
     };
+  },
+  methods: {
+    toggle() {
+      this.selected = !this.selected;
+      this.$emit('toggle', this.text);
+    },
   },
   mounted() {
     new CircleType(this.$refs.text).radius(this.radius);
