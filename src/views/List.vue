@@ -157,20 +157,20 @@ export default {
 
 .btn-text {
   position: absolute;
-  bottom: 13px;
+  top: 621px;
   left: calc(50% - 128px / 2);
   width: 128px;
   height: 33px;
 }
 
 .btn-text:active {
-  bottom: 11px;
+  top: 623px;
   left: calc(50% - 128px / 2 + 2px);
 }
 
 .btn-bg {
   position: absolute;
-  bottom: 9px;
+  top: 623px;
   left: calc(50% - 130px / 2 + 3px);;
   width: 130px;
   height: 35px;
