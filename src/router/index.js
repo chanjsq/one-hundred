@@ -20,6 +20,11 @@ const routes = [
     name: 'list',
     component: () => import('../views/List.vue'),
   },
+  {
+    path: '/share',
+    name: 'share',
+    component: () => import('../views/Share.vue'),
+  },
 ];
 
 const router = new VueRouter({

@@ -27,7 +27,8 @@ export default {
         this.$emit('login', this.name);
         this.showError = false;
         this.$refs.clickMusic.play().then(() => {
-          this.$router.replace('/list');
+          const a = `/list?name=${this.name}`;
+          this.$router.replace(a);
         });
       } else {
         this.showError = true;

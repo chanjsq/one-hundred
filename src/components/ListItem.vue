@@ -43,7 +43,7 @@ export default {
   methods: {
     toggle() {
       this.selected = !this.selected;
-      this.$emit('toggle', this.text);
+      this.$emit('toggle', this.id);
     },
   },
   mounted() {

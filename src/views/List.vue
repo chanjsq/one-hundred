@@ -20,8 +20,10 @@
     </div>
     <img class="confirm-text" src="@/assets/img/confirm-text.png">
     <template v-if="selectedCount">
+      <div @click = "goToShare">
       <img class="btn-bg" src="@/assets/img/confirm-bg.png">
       <img class="btn-text" src="@/assets/img/confirm-btn.png">
+      </div>
     </template>
   </div>
 </template>
@@ -65,6 +67,11 @@ export default {
     },
   },
   methods: {
+    goToShare() {
+      const { name } = this.$route.query;
+      const selection = this.selectedItems.toString();
+      this.$router.replace(`/share?name=${name}&sele=${selection}`);
+    },
     getConfigByIndex(index) {
       const id = index + 1;
       let top;
@@ -86,6 +93,7 @@ export default {
       } else {
         this.selectedItems.push(text);
       }
+      console.log(this.selectedItems);
     },
   },
 };
