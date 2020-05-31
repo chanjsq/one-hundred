@@ -1,43 +1,77 @@
 <template>
-  <div class="app" @click="playMusic">
+  <div class="app">
+    <audio ref="bgMusic" src="@/assets/audio/bg.mp3"></audio>
+    <div class="msc-div" v-if="rout === '/'">
+      <div class="music-btn" @click = "playMusic"></div>
+      <p class="mcs-txt">点击播放↑背景音乐</p>
+    </div>
     <transition name="slide-left">
       <router-view @login="saveName" />
     </transition>
-    <audio ref="bgMusic" src="@/assets/audio/bg.mp3"></audio>
   </div>
 </template>
 
 <script>
 export default {
   data() {
+    const route = this.$router.currentRoute.fullPath;
     return {
       name: '',
+      rout: route,
     };
   },
+  watch: {
+    $route(to) {
+      // console.log(to, from);
+      if (to.path !== '/') this.rout = '123';
+      else this.rout = '/';
+    },
+  },
   methods: {
+    saveName(name) {
+      this.name = name;
+    },
     playMusic() {
       const { bgMusic } = this.$refs;
       if (bgMusic.paused) {
         bgMusic.play();
+      } else {
+        bgMusic.pause();
       }
-    },
-    saveName(name) {
-      this.name = name;
     },
   },
 };
 </script>
 
 <style lang="scss">
+.msc-div {
+  position: absolute;
+  top: 25px;
+  right: 23px;
+  text-align: center;
+  z-index: 100;
+}
+.music-btn {
+  margin: auto;
+  position: relative;
+  width: 52px;
+  height: 52px;
+  background: url(~@/assets/img/music-btn.png) no-repeat center / contain;
+}
+.mcs-txt {
+  position: relative;
+  font-size: 12px;
+  color: black;
+}
 body {
   margin: 0;
   font-family: 'Heiti SC', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 .app {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 // 页面切换过渡
@@ -73,7 +107,7 @@ body {
   width: 40px;
   height: 100vh;
   background: url(~@/assets/img/side.jpg) repeat-y 0 0 / 100%;
-  animation: side 25s linear infinite both;
+  animation: side 40s linear infinite both;
 }
 
 .scrolling-side::before {
