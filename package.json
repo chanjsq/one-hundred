@@ -13,7 +13,7 @@
     "bootstrap-vue": "^2.12.0",
     "circletype": "^2.3.0",
     "core-js": "^3.6.4",
-    "html2canvas": "^1.0.0-rc.5",
+    "html2canvas": "1.0.0-rc.4",
     "http-proxy-middleware": "^1.0.4",
     "js-md5": "^0.7.3",
     "lodash": "^4.17.15",

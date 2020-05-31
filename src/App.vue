@@ -1,5 +1,10 @@
 <template>
   <div class="app">
+    <audio ref="bgMusic" src="@/assets/audio/bg.mp3"></audio>
+    <div class="msc-div" v-if="rout === '/'">
+      <div class="music-btn" @click = "playMusic"></div>
+      <p class="mcs-txt">点击播放↑背景音乐</p>
+    </div>
     <transition name="slide-left">
       <router-view @login="saveName" />
     </transition>
@@ -9,19 +14,55 @@
 <script>
 export default {
   data() {
+    const route = this.$router.currentRoute.fullPath;
     return {
       name: '',
+      rout: route,
     };
+  },
+  watch: {
+    $route(to) {
+      // console.log(to, from);
+      if (to.path !== '/') this.rout = '123';
+      else this.rout = '/';
+    },
   },
   methods: {
     saveName(name) {
       this.name = name;
+    },
+    playMusic() {
+      const { bgMusic } = this.$refs;
+      if (bgMusic.paused) {
+        bgMusic.play();
+      } else {
+        bgMusic.pause();
+      }
     },
   },
 };
 </script>
 
 <style lang="scss">
+.msc-div {
+  position: absolute;
+  top: 25px;
+  right: 23px;
+  text-align: center;
+  z-index: 100;
+}
+.music-btn {
+  margin: auto;
+  position: relative;
+  width: 52px;
+  height: 52px;
+  background: url(~@/assets/img/music-btn.png) no-repeat center / contain;
+}
+.mcs-txt {
+  position: relative;
+  font-size: 12px;
+  color: black;
+}
 body {
   margin: 0;
   font-family: 'Heiti SC', 'Helvetica Neue', Helvetica, sans-serif;

@@ -6,9 +6,12 @@
     </div>
     <div class="sharee" ref="mainDom">
       <div v-if="!imgUrl">
+      <div class="name">
+        <img src="@/assets/img/name.png" class="tianImg"/>
+        <p :class="nameClass">{{nameA}}</p>
+      </div>
         <img src="@/assets/img/title-3.png" class="headImg"/>
         <div class="barA">
-        <img src="@/assets/img/tian.png" class="tianImg"/>
           <div class="finishedA">已完成 {{selectedCount}} 件</div>
           <div class="qrDiv">
             <div class="qrDivLeftTxt">
@@ -26,7 +29,8 @@
             </b-col>
           </b-row>
         </div>
-        <p class="footer-txt">制作：重庆大学学生会宣传部，秘书处于卓浩；华晨<br/>部分素材来源：网易哒哒“人生必做的100件事”</p>
+        <p class="footer-txt">制作：重庆大学学生会宣传部，秘书处于卓浩；华晨</p>
+        <p class="footer-txt">部分素材来源：网易哒哒“人生必做的100件事”</p>
       </div>
     </div>
     <b-button
@@ -47,10 +51,17 @@ import yesapi from '../lib/yes3';
 export default {
   data() {
     const selectItems = this.$route.query.sele.split(',');
+    const { name } = this.$route.query;
+    let namec = '';
+    if (name.length === 3) namec = 'name_txt';
+    else if (name.length === 2) namec = 'name_txt_2';
+    else if (name.length === 4) namec = 'name_txt_4';
     return {
       selectedItems: selectItems,
       selectedCount: selectItems.length,
       imgUrl: null,
+      nameA: name,
+      nameClass: namec,
     };
   },
   computed: {
@@ -80,7 +91,7 @@ export default {
       } catch {}
     },
     async uploadData() {
-      await yesapi.table.create('cqu_50things_select', { sele: this.selectedItems.toString() });
+      await yesapi.table.create('cqu_50things_select', { sele: this.selectedItems.toString(), s_name: this.$route.query.name });
       await yesapi.table.create('cqu_50things_comment', { free: localStorage.getItem('free') });
     },
   },
@@ -88,17 +99,50 @@ export default {
 </script>
 
 <style scoped>
+
+.name {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+}
+.name_txt {
+  position: relative;
+  width: 30px;
+  margin-top: 3px;
+  margin-left: 10px;
+  font-size: 18px;
+  z-index: 100;
+  font-weight: bold;
+}
+.name_txt_2 {
+  position: relative;
+  width: 30px;
+  margin-top: 17px;
+  margin-left: 10px;
+  font-size: 18px;
+  z-index: 100;
+  font-weight: bold;
+}
+.name_txt_4 {
+  position: relative;
+  width: 30px;
+  margin-top: 1px;
+  margin-left: 12px;
+  line-height: 21px;
+  font-size: 16px;
+  z-index: 100;
+  font-weight: bold;
+}
+.tianImg {
+  position: absolute;
+  width: 36px;
+}
+
 .footer-txt {
   font-size: 10px;
   color: rgba(0,0,0,0.6);
   text-align: center;
-}
-.tianImg {
-  position: absolute;
-  top: -50px;
-  left: 10px;
-  height: 70px;
-  z-index: 100;
+  margin-bottom: 0px;
 }
 
 .newImg {
@@ -152,21 +196,23 @@ display: flex;
 }
 
 .qrImg {
-  line-height: 60px;
+  line-height: 55px;
   height: 50px;
   width: 50px;
   vertical-align: center;
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
 .qrDivLeftTxt {
   font-size: 12px;
   height: 60px;
+  line-height: 20px;
   display:flex;
   justify-content: center;
   flex-direction: column;
 }
 .upTxt {
+  margin-top: -3px;
   font-weight: bold;
 }
 
@@ -179,7 +225,6 @@ display: flex;
 }
 
 .finishedA {
-  height: 58px;
   background-color: black;
   padding: 10px;
   color:white;
@@ -187,7 +232,8 @@ display: flex;
   width: 60%;
   text-align: center;
   font-weight: bolder;
-  line-height: 40px;
+  height: 58px;
+  line-height: 35px;
 }
 .headImg{
   margin-top: 20px;

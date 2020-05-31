@@ -1,6 +1,5 @@
 <template>
   <div class="home scrolling-side">
-    <div class="music-btn"></div>
     <img class="title" src="@/assets/img/title.png">
     <img class="eye" src="@/assets/img/bird.png">
     <div class="start" @click="toLogin">
@@ -17,9 +16,18 @@ export default {
     // alert('灵感来源：网易哒哒“人生必做的100件事”');
     return {};
   },
+  mounted() {
+    alert('建议点击右上角小天打开背景音乐哦~');
+  },
   methods: {
     toLogin() {
-      this.$router.replace('/list');
+      this.$router.replace('/name');
+    },
+    playMusic() {
+      const { bgMusic } = this.$refs;
+      if (bgMusic.paused) {
+        bgMusic.play();
+      }
     },
   },
 };
@@ -40,14 +48,23 @@ export default {
   height: 100%;
   background-color: #fbec71;
 }
-
-.music-btn {
+.msc-div {
   position: absolute;
   top: 25px;
   right: 23px;
+  text-align: center;
+}
+.music-btn {
+  margin: auto;
+  position: relative;
   width: 52px;
   height: 52px;
   background: url(~@/assets/img/music-btn.png) no-repeat center / contain;
+}
+.mcs-txt {
+  position: relative;
+  font-size: 12px;
+  color: black;
 }
 
 .title {

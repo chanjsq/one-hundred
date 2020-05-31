@@ -1,13 +1,13 @@
 <template>
   <div class="login scrolling-side-right">
     <img class="title" src="@/assets/img/title-3.png">
-    <img class="input-bg" src="@/assets/img/input-bg.png">
-    <textarea class="input" v-model="name" v-focus />
+    <img class="input-bg" src="@/assets/img/input_name.png">
+    <input type="text" class="input" v-model="name" v-focus />
     <div class="error-tip" v-if="showError">
-      <img class="error-img" src="@/assets/img/error.png">请输入你的自定义list
+      <img class="error-img" src="@/assets/img/error.png">请输入你的名字（昵称也行），字数要小于等于4哦~
     </div>
-    <img class="confirm-txt" src="@/assets/img/free_txt.png" />
-    <img class="confirm-top" src="@/assets/img/finish.png" @click="onSubmit">
+    <img class="confirm-txt" src="@/assets/img/name_txt.png" />
+    <img class="confirm-top" src="@/assets/img/confirm-top.png" @click="onSubmit">
   </div>
 </template>
 
@@ -21,12 +21,10 @@ export default {
   },
   methods: {
     onSubmit() {
-      const { sele, name } = this.$route.query;
-      if (this.name) {
+      if (this.name && (this.name.length <= 4)) {
         this.$emit('login', this.name);
         this.showError = false;
-        localStorage.setItem('free', this.name);
-        this.$router.replace(`/share?sele=${sele}&name=${name}`);
+        this.$router.replace(`/list?name=${this.name}`);
       } else {
         this.showError = true;
       }
@@ -36,38 +34,11 @@ export default {
 </script>
 
 <style scoped>
-.login {
-  width: 100%;
-  height: 100%;
-  background-color: rgb(255,250,222);
-}
-
-.title {
-  position: absolute;
-  top: 16px;
-  right: 53px;
-  width: 114px;
-}
-.confirm-txt {
-  position: absolute;
-  width: 220px;
-  top: 305px;
-  left: 40px;
-}
-.input-bg {
-  position: absolute;
-  left: 37px;
-  top: 90px;
-  width: 244px;
-}
-
-
 .input {
   position: absolute;
   left: 41px;
-  top: 147px;
+  top: 149px;
   width: 239px;
-  height: 115px;
   outline: 0;
   border: 0;
   padding: 0;
@@ -78,9 +49,47 @@ export default {
   text-align: center;
 }
 
+.login {
+  width: 100vw;
+  height: 100%;
+  background-color: rgb(255,250,222);
+}
+
+.title {
+  position: absolute;
+  top: 16px;
+  right: 53px;
+  width: 114px;
+}
+
+.input-bg {
+  position: absolute;
+  left: 37px;
+  top: 209px;
+  width: 350px;
+}
+.title {
+  position: absolute;
+  top: 16px;
+  right: 53px;
+  width: 114px;
+}
+.confirm-txt {
+  position: absolute;
+  width: 220px;
+  top: 230px;
+  left: 40px;
+}
+.input-bg {
+  position: absolute;
+  left: 37px;
+  top: 90px;
+  width: 244px;
+}
+
 .error-tip {
   position: absolute;
-  top: 275px;
+  top: 195px;
   left: 0;
   right: 50px;
   text-align: center;
@@ -99,11 +108,19 @@ export default {
   animation: shine .5s linear infinite alternate both;
 }
 
+.confirm-bg {
+  position: absolute;
+  top: 466px;
+  left: 101px;
+  width: 130px;
+  height: 35px;
+}
+
 .confirm-top {
   position: absolute;
-  top: 563px;
-  right: 100px;
-  width: 110px;
+  top: 513px;
+  left: 100px;
+  width: 105px;
   transition: all .15s linear;
 }
 

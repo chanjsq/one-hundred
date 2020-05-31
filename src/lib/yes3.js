@@ -15,7 +15,6 @@ import md5 from 'js-md5';
 
 
 const CONFIG = {
-  // INTERFACE_URL : 'https://puluter.cn/server.php',
   INTERFACE_URL: '/yesapi.php',
 };
 
