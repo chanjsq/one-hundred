@@ -18,10 +18,14 @@
         @toggle="updateSelectedItems"
       />
     </div>
-    <img class="confirm-text" src="@/assets/img/confirm-text.png">
+    <div>
+      <img class="confirm-text" src="@/assets/img/confirm-text.png">
+      <div class="tipsDiv">
+      <p class="tips">如果转过去了没来得及点别担心，一会它们会再转回来哦~</p>
+      </div>
+    </div>
     <template v-if="selectedCount">
       <div @click = "goToShare">
-      <img class="btn-bg" src="@/assets/img/confirm-bg.png">
       <img class="btn-text" src="@/assets/img/confirm-btn.png">
       </div>
     </template>
@@ -67,10 +71,14 @@ export default {
     },
   },
   methods: {
+    saveImage() {
+      // console.log(this.$refs.wheel);
+      // this.$refs.wheel.class
+    },
     goToShare() {
       const { name } = this.$route.query;
       const selection = this.selectedItems.toString();
-      this.$router.replace(`/share?name=${name}&sele=${selection}`);
+      this.$router.replace(`/login?name=${name}&sele=${selection}`);
     },
     getConfigByIndex(index) {
       const id = index + 1;
@@ -81,8 +89,8 @@ export default {
         top = 50 + (index % 5) * 80 + 40;
       }
       top += _.random(-10, 10, false);
-      const angle = Math.floor(index / 5) * 18;
-      const radius = 2000 / 2 - top;
+      const angle = Math.floor(index / 5) * 36;
+      const radius = (2000 / 2 - top);
       return {
         id, top, angle, radius,
       };
@@ -93,19 +101,41 @@ export default {
       } else {
         this.selectedItems.push(text);
       }
-      console.log(this.selectedItems);
+      // console.log(this.selectedItems);
     },
   },
 };
 </script>
 
 <style scoped>
+.tipsDiv {
+  text-align: center;
+  position: absolute;
+  bottom: 80px;
+  left: 0px;
+  right: 0px;
+}
+.tips {
+  text-align: center;
+  margin: auto;
+  font-size: 12px;
+  font-style: italic;
+  color: rgb(177,177,177);
+}
 .list {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background: #f0f0f0;
+}
+.floating-button {
+position: absolute;
+right: 16px;
+bottom: 150px;
+z-index: 1500;
+overflow: hidden;
+display: flex;
 }
 
 .top {
@@ -145,7 +175,7 @@ export default {
   width: 2000px;
   height: 2000px;
   border-radius: 50%;
-  animation: spin 140s linear infinite;
+  animation: spin 60s linear infinite;
   color: #000;
 }
 
@@ -157,23 +187,18 @@ export default {
 
 .confirm-text {
   position: absolute;
-  top: 600px;
+  bottom: 100px;
   left: calc(50% - 130px / 2);
   width: 130px;
   height: 12px;
 }
 
+
 .btn-text {
   position: absolute;
-  top: 621px;
+  bottom: 20px;
   left: calc(50% - 128px / 2);
   width: 128px;
-  height: 33px;
-}
-
-.btn-text:active {
-  top: 623px;
-  left: calc(50% - 128px / 2 + 2px);
 }
 
 .btn-bg {

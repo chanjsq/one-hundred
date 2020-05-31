@@ -1,14 +1,18 @@
 /* eslint-disable guard-for-in */
 <template>
-  <div>
+  <div class="A" style="background-color:rgb(255,250,222);">
+    <div v-if="imgUrl">
+      <img :src="imgUrl" class="newImg" />
+    </div>
     <div class="sharee" ref="mainDom">
       <div v-if="!imgUrl">
-        <img src="@/assets/img/head.png" class="headImg"/>
+        <img src="@/assets/img/title-3.png" class="headImg"/>
         <div class="barA">
+        <img src="@/assets/img/tian.png" class="tianImg"/>
           <div class="finishedA">已完成 {{selectedCount}} 件</div>
           <div class="qrDiv">
             <div class="qrDivLeftTxt">
-              <div class="upTxt">扫码\\标记</div>
+              <div class="upTxt">扫码//标记</div>
               <div class="botTxt">你的重大之旅</div>
             </div>
             <img src="@/assets/img/qrcode.jpg" class="qrImg"/>
@@ -22,18 +26,23 @@
             </b-col>
           </b-row>
         </div>
-      </div>
-      <div v-if="imgUrl">
-        <img :src="imgUrl" class="newImg" />
+        <p class="footer-txt">制作：重庆大学学生会宣传部，秘书处于卓浩；华晨<br/>部分素材来源：网易哒哒“人生必做的100件事”</p>
       </div>
     </div>
-    <b-button variant="success" class="floating-button" @click="saveImage">点击这里保存截图</b-button>
+    <b-button
+      v-if="!imgUrl"
+      variant="success"
+      class="floating-button"
+      @click="saveImage">
+    点击这里保存截图
+    </b-button>
   </div>
 </template>
 
 <script>
 import items from '@/mock/items';
 import html2canvas from 'html2canvas';
+import yesapi from '../lib/yes3';
 
 export default {
   data() {
@@ -47,10 +56,10 @@ export default {
   computed: {
     computeItems() {
       return this.selectedItems.map((item) => {
-        const itemSrc = parseInt(item, 10) + 1;
+        const itemSrc = parseInt(item, 10);
         return {
           idd: item,
-          text: items[item],
+          text: items[item - 1],
           src: `/things/${itemSrc}.png`,
         };
       });
@@ -65,12 +74,33 @@ export default {
         this.imgUrl = canvas.toDataURL('image/png');
         alert('长按页面即可以下载图片');
       });
+      try {
+        this.uploadData();
+      // eslint-disable-next-line no-empty
+      } catch {}
+    },
+    async uploadData() {
+      await yesapi.table.create('cqu_50things_select', { sele: this.selectedItems.toString() });
+      await yesapi.table.create('cqu_50things_comment', { free: localStorage.getItem('free') });
     },
   },
 };
 </script>
 
 <style scoped>
+.footer-txt {
+  font-size: 10px;
+  color: rgba(0,0,0,0.6);
+  text-align: center;
+}
+.tianImg {
+  position: absolute;
+  top: -50px;
+  left: 10px;
+  height: 70px;
+  z-index: 100;
+}
+
 .newImg {
   width: 100%;
 }
@@ -79,6 +109,7 @@ position: absolute;
 right: 16px;
 bottom: 150px;
 z-index: 1500;
+height: 100px;
 overflow: hidden;
 display: flex;
 }
@@ -101,16 +132,20 @@ display: flex;
 .imgs {
   padding: 10px;
 }
+.A {
+  min-height: 100%;
+  background-color: rgb(255,250,222);
+}
 .sharee {
-  background-color: rgb(240,240,240);
-  min-height: 600px;
+  background-color: rgb(255,250,222);
+  min-height: 400px;
 }
 .qrDiv {
   height:58px;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   width: 40%;
-  background-color: rgb(240,240,240);
+  background-color: rgb(255,250,222);
   display: flex;
   justify-content: space-around;
   flex-direction: row;
@@ -136,6 +171,7 @@ display: flex;
 }
 
 .barA {
+  position: relative;
   margin-top: -4px;
   min-height: 60px;
   display:flex;
@@ -154,6 +190,9 @@ display: flex;
   line-height: 40px;
 }
 .headImg{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 40px;
   width: 100%;
 }
 .line_02{

@@ -1,15 +1,13 @@
 <template>
   <div class="login scrolling-side-right">
-    <img class="title" src="@/assets/img/title-2.png">
+    <img class="title" src="@/assets/img/title-3.png">
     <img class="input-bg" src="@/assets/img/input-bg.png">
-    <img class="input-circle" src="@/assets/img/input-circle.png">
-    <input class="input" v-model="name" v-focus>
+    <textarea class="input" v-model="name" v-focus />
     <div class="error-tip" v-if="showError">
-      <img class="error-img" src="@/assets/img/error.png">请输入名字
+      <img class="error-img" src="@/assets/img/error.png">请输入你的自定义list
     </div>
-    <img class="confirm-bg" src="@/assets/img/confirm-bg.png">
-    <img class="confirm-top" src="@/assets/img/confirm-top.png" @click="onSubmit">
-    <audio ref="clickMusic" src="@/assets/audio/click.mp3"></audio>
+    <img class="confirm-txt" src="@/assets/img/free_txt.png" />
+    <img class="confirm-top" src="@/assets/img/finish.png" @click="onSubmit">
   </div>
 </template>
 
@@ -23,13 +21,12 @@ export default {
   },
   methods: {
     onSubmit() {
+      const { sele } = this.$route.query;
       if (this.name) {
         this.$emit('login', this.name);
         this.showError = false;
-        this.$refs.clickMusic.play().then(() => {
-          const a = `/list?name=${this.name}`;
-          this.$router.replace(a);
-        });
+        localStorage.setItem('free', this.name);
+        this.$router.replace(`/share?sele=${sele}`);
       } else {
         this.showError = true;
       }
@@ -40,8 +37,9 @@ export default {
 
 <style scoped>
 .login {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255,250,222);
 }
 
 .title {
@@ -49,32 +47,27 @@ export default {
   top: 16px;
   right: 53px;
   width: 114px;
-  height: 75px;
 }
-
+.confirm-txt {
+  position: absolute;
+  width: 220px;
+  top: 305px;
+  left: 40px;
+}
 .input-bg {
   position: absolute;
   left: 37px;
-  top: 209px;
+  top: 90px;
   width: 244px;
-  height: 113px;
 }
 
-.input-circle {
-  position: absolute;
-  top: 188px;
-  left: 107px;
-  width: 48px;
-  height: 46px;
-  animation: spin 8s linear infinite;
-}
 
 .input {
   position: absolute;
   left: 41px;
-  top: 282px;
+  top: 147px;
   width: 239px;
-  height: 23px;
+  height: 115px;
   outline: 0;
   border: 0;
   padding: 0;
@@ -87,7 +80,7 @@ export default {
 
 .error-tip {
   position: absolute;
-  top: 334px;
+  top: 275px;
   left: 0;
   right: 50px;
   text-align: center;
@@ -106,27 +99,14 @@ export default {
   animation: shine .5s linear infinite alternate both;
 }
 
-.confirm-bg {
-  position: absolute;
-  top: 466px;
-  left: 101px;
-  width: 130px;
-  height: 35px;
-}
-
 .confirm-top {
   position: absolute;
-  top: 463px;
-  left: 100px;
-  width: 128px;
-  height: 33px;
+  top: 563px;
+  right: 100px;
+  width: 110px;
   transition: all .15s linear;
 }
 
-.confirm-top:active {
-  top: 466px;
-  left: 102px;
-}
 
 @keyframes shine {
   0% {

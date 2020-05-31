@@ -2,35 +2,42 @@
   <div class="home scrolling-side">
     <div class="music-btn"></div>
     <img class="title" src="@/assets/img/title.png">
-    <img class="eye" src="@/assets/img/eye.png">
-    <img class="eye-outline" src="@/assets/img/eye-outline.png">
-    <img class="text" src="@/assets/img/text.png">
-    <div class="slide">
-      <img class="slide-line" src="@/assets/img/slide-line.png">
-      <img class="slide-text" src="@/assets/img/slide-text.png">
-      <div class="slide-btn" @click="toLogin">
-        <img class="slide-btn-inner" src="@/assets/img/slide-btn-inner.png">
-        <img class="slide-btn-outer" src="@/assets/img/slide-btn-outer.png">
-      </div>
+    <img class="eye" src="@/assets/img/bird.png">
+    <div class="start" @click="toLogin">
+      <img class="text" src="@/assets/img/leaves.png">
+      <p class="text2">点击开始</p>
     </div>
+    <img src="@/assets/img/3tian.png" class="footer1"/>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    // alert('灵感来源：网易哒哒“人生必做的100件事”');
+    return {};
+  },
   methods: {
     toLogin() {
-      this.$router.replace('/login');
+      this.$router.replace('/list');
     },
   },
 };
 </script>
 
 <style scoped>
+.footer1 {
+  position: absolute;
+  z-index: 11;
+  bottom: 0rem;
+  width: 15rem;
+  right: 3rem;
+  height: auto;
+}
 .home {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: #fbec71;
 }
 
@@ -38,7 +45,7 @@ export default {
   position: absolute;
   top: 25px;
   right: 23px;
-  width: 22px;
+  width: 52px;
   height: 52px;
   background: url(~@/assets/img/music-btn.png) no-repeat center / contain;
 }
@@ -47,16 +54,16 @@ export default {
   position: absolute;
   left: 59px;
   top: 159px;
-  width: 221px;
-  height: 134px;
+  width: auto;
+  height: 164px;
 }
 
 .eye {
   position: absolute;
   top: 148px;
   left: 277px;
-  width: 34px;
-  height: 19px;
+  width: 50px;
+  height: 30px;
 }
 
 .eye-outline {
@@ -68,12 +75,22 @@ export default {
   animation: spin 7s linear infinite both;
 }
 
-.text {
+.start {
   position: absolute;
-  left: 102px;
-  top: 341px;
-  width: 240px;
-  height: 132px;
+  right: 60px;
+  top: 361px;
+}
+
+.text {
+  width: auto;
+  height: 80px;
+}
+
+.text2 {
+  position: relative;
+  color: black;
+  right: 0px;
+  text-align: right;
 }
 
 .slide {

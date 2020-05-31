@@ -1,9 +1,8 @@
 <template>
-  <div class="app" @click="playMusic">
+  <div class="app">
     <transition name="slide-left">
       <router-view @login="saveName" />
     </transition>
-    <audio ref="bgMusic" src="@/assets/audio/bg.mp3"></audio>
   </div>
 </template>
 
@@ -15,12 +14,6 @@ export default {
     };
   },
   methods: {
-    playMusic() {
-      const { bgMusic } = this.$refs;
-      if (bgMusic.paused) {
-        bgMusic.play();
-      }
-    },
     saveName(name) {
       this.name = name;
     },
@@ -35,9 +28,9 @@ body {
 }
 
 .app {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 // 页面切换过渡
@@ -73,7 +66,7 @@ body {
   width: 40px;
   height: 100vh;
   background: url(~@/assets/img/side.jpg) repeat-y 0 0 / 100%;
-  animation: side 25s linear infinite both;
+  animation: side 40s linear infinite both;
 }
 
 .scrolling-side::before {
